@@ -4,6 +4,7 @@ const getBooksList = async (bookStores) => {
     try{
         
        bookStores.data.forEach((bookStore) => {
+           console.log("this is the book store in for each ", bookStore);
             let bookStoreObj = {};
             bookStoreObj.bookStore = bookStore.attributes;
             let theBookIdsArray = bookStore.relationships.books.data;
@@ -19,6 +20,8 @@ const getBooksList = async (bookStores) => {
                     let bookObj = {};
                     bookObj.name = item.attributes.name;
                     bookObj.copiesSold = item.attributes.copiesSold;
+                    bookObj.website = item.attributes.website;
+                    bookObj.establishmentDate = item.attributes.establishmentDate;
                     let theAuthorId = item.relationships.author.data.id
                      let author = bookStores.included.filter(element => element.id === theAuthorId && element.type==='authors')
                      bookObj.author = author;
