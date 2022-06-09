@@ -1,62 +1,28 @@
 import React from 'react';
+import getBooksList from "../helpers/getBooksList"
 
 class Parent extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            bookStores: null,
-
+            bookStoreList: []
         };
     }
 
-    componentDidMount() {
+   async componentDidMount() {
         // Simple GET request using fetch
-        fetch('http://localhost:3000/stores')
-            .then(response => response.json())
-            .then(data => this.setState({ bookStores: data }, ()=> {
-                console.log("this is the data ", this.state.bookStores.data);
-                console.log("this is the ", this.state.bookStores.data);
-                let bookStoreObj = {};
-                let theBookStores = [];
-                this.state.bookStores.data.forEach((bookStore) => {
-                    bookStoreObj.bookStore = bookStore.attributes;
-                    let theBookIdsArray = bookStore.relationships.books.data;
-                    let theBookIds = [];
-                    for(let item of theBookIdsArray){
-                        theBookIds.push(item.id);
-                    }
-                    let countryId = bookStore.relationships.countries.data.id;
-                    let country;
-                    let books = []
-                    this.state.bookStores.included.forEach((item) => {
-                        if(item.type === 'books' && theBookIds.includes(item.id)){
-                            let bookObj = {};
-                            bookObj.name = item.attributes.name;
-                            bookObj.copiesSold = item.attributes.copiesSold;
-                            let theAuthorId = item.relationships.author.data.id
-                            console.log("this is the book obj ", bookObj);
-                            console.log("this is the author id ", theAuthorId);
-                             let author = this.state.bookStores.included.filter(element => element.id === theAuthorId && element.type==='authors')
-                             bookObj.author = author;
-                             books.push(bookObj);
-                        }
-                        if(item.type === 'countries' && item.id === countryId){
-                            let country = item.attributes.code;
-                            bookStoreObj.country = country;
-                        }
-                        
-                        bookStoreObj.books = books;
-                    });
-                    console.log("this is the books store object ", JSON.stringify(bookStoreObj));
-                })
-            }));
+       const response = await fetch('http://localhost:3000/stores')
+       const json = await response.json()
+       const booksList = await getBooksList(json);
+       console.log("this is the booksList before setting state ", booksList);
+       this.setState({bookStoreList: booksList});
     }
 
     render() {
         let cardObj = {};
-        const { bookStores } = this.state;
-        console.log(bookStores);
+        const { bookStoreList } = this.state;
+        console.log("this is the book stores ", bookStoreList);
 
         return (
             <div className="card text-center m-3">
