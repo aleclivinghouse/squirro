@@ -11,13 +11,26 @@ class Parent extends React.Component {
     }
 
    async componentDidMount() {
+       try{
         // Simple GET request using fetch
-       const response = await fetch('http://localhost:3000/stores')
-       const json = await response.json()
-       const booksList = await getBooksList(json);
-       console.log("this is the booksList before setting state ", booksList);
-       this.setState({bookStoreList: booksList});
+        const response = await fetch('http://localhost:3000/stores')
+        const json = await response.json()
+        const booksList = await getBooksList(json)
+       this.setState({bookStoreList: booksList})
+      
+
+       }catch(err){
+           console.log(err)
+       }
+
+
+//console.log("this is the booksList before setting state ", booksList);
+;
+    
+      
     }
+
+
 
     render() {
         let cardObj = {};
