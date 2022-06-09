@@ -1,5 +1,6 @@
 import React from 'react';
 import getBooksList from "../helpers/getBooksList"
+import Card from "../components/Card";
 
 class Parent extends React.Component {
     constructor(props) {
@@ -39,10 +40,9 @@ class Parent extends React.Component {
 
         return (
             <div className="card text-center m-3">
-                <h5 className="card-header">Simple GET Request</h5>
-                <div className="card-body">
-                    
-                </div>
+                {bookStoreList.map((item) => (
+                    <Card bookStore={item}/>
+                ))}
             </div>
         );
     }

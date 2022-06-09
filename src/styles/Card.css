@@ -1,0 +1,47 @@
+#parent {
+    display: flex;
+    width: 800px;
+    margin:auto;
+    padding-bottom : 30px;
+    padding-top: 30px;
+  }
+
+.row{
+    height: 200px;
+}
+
+#picture-column{
+    height:300px;
+    background-color: blue;
+}
+
+#right-wrapper{
+    height:300px;
+    background-color: red;
+}
+
+#title{
+    height:100px;
+    background-color: green;
+}
+
+#star-rating{
+    height:100px;
+    background-color: yellow;
+}
+
+#bottom-left{
+    height:100px;
+    background-color: green;
+}
+
+#bottom-right{
+    height:100px;
+    background-color: yellow;
+}
+
+#table{
+    background-color: purple;
+    height:100px;
+    margin-top: -50px;
+}
