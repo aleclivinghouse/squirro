@@ -13,6 +13,9 @@
 #picture-column{
     height:300px;
     background-color: blue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #right-wrapper{
